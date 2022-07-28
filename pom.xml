@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2020 comic4cloud Authors. All Rights Reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.thtns.cloud</groupId>
+	<artifactId>douyin</artifactId>
+	<name>${project.artifactId}</name>
+	<version>1.0.0</version>
+
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.10</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<spring-boot.version>2.6.7</spring-boot.version>
+		<spring-cloud.version>2021.0.2</spring-cloud.version>
+		<spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<spring-boot-admin.version>2.6.7</spring-boot-admin.version>
+		<hutool.version>5.8.4</hutool.version>
+		<dynamic-ds.version>3.5.1</dynamic-ds.version>
+		<velocity.version>2.3</velocity.version>
+		<velocity.tool.version>3.1</velocity.tool.version>
+		<configuration.version>1.10</configuration.version>
+		<jasypt.version>2.1.0</jasypt.version>
+		<swagger.fox.version>3.0.0</swagger.fox.version>
+		<git.commit.plugin>4.9.9</git.commit.plugin>
+		<spring.checkstyle.plugin>0.0.29</spring.checkstyle.plugin>
+		<mybatis-plus.version>3.5.1</mybatis-plus.version>
+		<mysql.version>8.0.29</mysql.version>
+		<oss.version>1.0.4</oss.version>
+		<security.oauth.version>2.1.8.RELEASE</security.oauth.version>
+		<swagger.core.version>2.2.0</swagger.core.version>
+		<docker.plugin.version>0.32.0</docker.plugin.version>
+		<springdoc.version>1.6.6</springdoc.version>
+		<log4j2.version>2.17.1</log4j2.version>
+	</properties>
+
+	<!-- 以下依赖 全局所有的模块都会引入  -->
+	<dependencies>
+
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-web</artifactId>-->
+		<!--			<scope>provided</scope>-->
+		<!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<!--配置文件处理器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!--配置文件加解密-->
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>${jasypt.version}</version>
+		</dependency>
+		<!--Lombok-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!--测试依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>${hutool.version}</version>
+		</dependency>
+
+
+		<!--稳定版本，替代spring security bom内置-->
+		<dependency>
+			<groupId>org.springframework.security.oauth.boot</groupId>
+			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+			<version>${security.oauth.version}</version>
+		</dependency>
+		<!--springdoc -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-webmvc-core</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>${swagger.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-webflux-ui</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-security</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+
+
+		<!-- excel 导入导出 -->
+		<!--			<dependency>-->
+		<!--				<groupId>com.pig4cloud.excel</groupId>-->
+		<!--				<artifactId>excel-spring-boot-starter</artifactId>-->
+		<!--				<version>${excel.version}</version>-->
+		<!--			</dependency>-->
+		<!--			&lt;!&ndash;  阿里云短信下发 &ndash;&gt;-->
+		<!--			<dependency>-->
+		<!--				<groupId>io.springboot.sms</groupId>-->
+		<!--				<artifactId>aliyun-sms-spring-boot-starter</artifactId>-->
+		<!--				<version>${sms.version}</version>-->
+		<!--			</dependency>-->
+		<!--oss-->
+		<dependency>
+			<groupId>com.pig4cloud.plugin</groupId>
+			<artifactId>oss-spring-boot-starter</artifactId>
+			<version>${oss.version}</version>
+		</dependency>
+		<!--			&lt;!&ndash;  seata kryo 序列化&ndash;&gt;-->
+		<!--			<dependency>-->
+		<!--				<groupId>io.seata</groupId>-->
+		<!--				<artifactId>seata-serializer-kryo</artifactId>-->
+		<!--				<version>${seata.version}</version>-->
+		<!--			</dependency>-->
+		<!--			<dependency>-->
+		<!--				<groupId>org.ow2.asm</groupId>-->
+		<!--				<artifactId>asm</artifactId>-->
+		<!--				<version>${asm.version}</version>-->
+		<!--			</dependency>-->
+		<!--orm 相关-->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>${mybatis-plus.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-extension</artifactId>
+			<version>${mybatis-plus.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-annotation</artifactId>
+			<version>${mybatis-plus.version}</version>
+		</dependency>
+		<!--web 模块-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring-boot.version}</version>
+			<exclusions>
+				<!--排除tomcat依赖-->
+				<exclusion>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--  指定 log4j 版本-->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-to-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-bom</artifactId>
+			<version>${log4j2.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<!--			<dependency>-->
+		<!--				<groupId>com.alibaba.csp</groupId>-->
+		<!--				<artifactId>sentinel-core</artifactId>-->
+		<!--				<version>${sentinel.version}</version>-->
+		<!--				<type>pom</type>-->
+		<!--				<scope>import</scope>-->
+		<!--			</dependency>-->
+		<!--			<dependency>-->
+		<!--				<groupId>com.alibaba.csp</groupId>-->
+		<!--				<artifactId>sentinel-web-servlet</artifactId>-->
+		<!--				<version>${sentinel.version}</version>-->
+		<!--				<type>pom</type>-->
+		<!--				<scope>import</scope>-->
+		<!--			</dependency>-->
+		<!--			<dependency>-->
+		<!--				<groupId>com.alibaba.csp</groupId>-->
+		<!--				<artifactId>sentinel-transport-simple-http</artifactId>-->
+		<!--				<version>${sentinel.version}</version>-->
+		<!--				<type>pom</type>-->
+		<!--				<scope>import</scope>-->
+		<!--			</dependency>-->
+		<!--			<dependency>-->
+		<!--				<groupId>com.alibaba.csp</groupId>-->
+		<!--				<artifactId>sentinel-parameter-flow-control</artifactId>-->
+		<!--				<version>${sentinel.version}</version>-->
+		<!--				<type>pom</type>-->
+		<!--				<scope>import</scope>-->
+		<!--			</dependency>-->
+		<!--			<dependency>-->
+		<!--				<groupId>com.alibaba.csp</groupId>-->
+		<!--				<artifactId>sentinel-api-gateway-adapter-common</artifactId>-->
+		<!--				<version>${sentinel.version}</version>-->
+		<!--				<type>pom</type>-->
+		<!--				<scope>import</scope>-->
+		<!--			</dependency>-->
+		<!--			<dependency>-->
+		<!--				<groupId>com.github.javen205</groupId>-->
+		<!--				<artifactId>IJPay-AliPay</artifactId>-->
+		<!--				<version>${ijpay.version}</version>-->
+		<!--			</dependency>-->
+
+
+	</dependencies>
+
+
+	<build>
+		<finalName>${project.name}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot.version}</version>
+					<configuration>
+						<finalName>${project.build.finalName}</finalName>
+						<layers>
+							<enabled>true</enabled>
+						</layers>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!--				<plugin>-->
+				<!--					<groupId>io.fabric8</groupId>-->
+				<!--					<artifactId>docker-maven-plugin</artifactId>-->
+				<!--					<version>${docker.plugin.version}</version>-->
+				<!--					<configuration>-->
+				<!--						&lt;!&ndash; Docker Remote Api&ndash;&gt;-->
+				<!--						<dockerHost>${docker.host}</dockerHost>-->
+				<!--						&lt;!&ndash; Docker 镜像私服&ndash;&gt;-->
+				<!--						<registry>${docker.registry}</registry>-->
+				<!--						&lt;!&ndash; 认证信息&ndash;&gt;-->
+				<!--						<authConfig>-->
+				<!--							<push>-->
+				<!--								<username>${docker.username}</username>-->
+				<!--								<password>${docker.password}</password>-->
+				<!--							</push>-->
+				<!--						</authConfig>-->
+				<!--						<images>-->
+				<!--							<image>-->
+				<!--								&lt;!&ndash; 镜像名称： 172.17.0.111/library/comic-gateway:2.6.3&ndash;&gt;-->
+				<!--								<name>${docker.registry}/${docker.namespace}/${project.name}:${project.version}</name>-->
+				<!--								<build>-->
+				<!--									<dockerFile>${project.basedir}/Dockerfile</dockerFile>-->
+				<!--								</build>-->
+				<!--							</image>-->
+				<!--						</images>-->
+				<!--					</configuration>-->
+				<!--				</plugin>-->
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!--打包jar 与git commit 关联插件-->
+			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>${git.commit.plugin}</version>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>initialize</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<failOnNoGitDirectory>false</failOnNoGitDirectory>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<!--因为项目定制了jackson的日期时间序列化/反序列化格式，因此这里要进行配置,不然通过management.info.git.mode=full进行完整git信息监控时会存在问题-->
+					<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+					<includeOnlyProperties>
+						<includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.(id|message|time).*$</includeOnlyProperty>
+					</includeOnlyProperties>
+				</configuration>
+			</plugin>
+			<!--代码格式插件，默认使用spring 规则-->
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>${spring.checkstyle.plugin}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<!-- 环境标识，需要与配置文件的名称相对应 -->
+				<profiles.active>dev</profiles.active>
+			</properties>
+			<activation>
+				<!-- 默认环境 -->
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
+</project>
