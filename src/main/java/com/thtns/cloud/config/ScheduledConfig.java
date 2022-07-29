@@ -25,7 +25,6 @@ import java.util.concurrent.ScheduledFuture;
 @Slf4j
 public class ScheduledConfig implements SchedulingConfigurer {
     private final Map<String, ScheduledFuture<?>> taskFutures = new ConcurrentHashMap<>();
-    //笔者这里配合数据库来实现动态添加。方便查询数据库这里使用JdbcTemplate
     private DyTaskService dyTaskService;
     private ScheduledTaskRegistrar taskRegistrar;
     private Set<ScheduledFuture<?>> scheduledFutures = null;

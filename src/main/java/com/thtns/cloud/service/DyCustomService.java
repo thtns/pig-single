@@ -5,4 +5,7 @@ import com.thtns.cloud.entity.DyCustom;
 
 public interface DyCustomService extends IService<DyCustom> {
 
+    void add(String code);
+
+
 }
