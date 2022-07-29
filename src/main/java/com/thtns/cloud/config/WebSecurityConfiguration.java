@@ -54,7 +54,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.formLogin().loginPage("/token/login").loginProcessingUrl("/token/form")
                 .failureHandler(authenticationFailureHandler()).and().logout()
                 .logoutSuccessHandler(logoutSuccessHandler()).deleteCookies("JSESSIONID").invalidateHttpSession(true)
-                .and().authorizeRequests().antMatchers("/token/**", "/actuator/**", "/mobile/**", "/code/**").permitAll()
+                .and().authorizeRequests().antMatchers("/token/**", "/actuator/**", "/mobile/**", "/code/**", "/douYin/callback/**").permitAll()
                 .anyRequest().authenticated().and().csrf().disable();
     }
 
